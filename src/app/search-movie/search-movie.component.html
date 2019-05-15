@@ -1,0 +1,40 @@
+
+<form (ngSubmit)= " signInForm.valid && onSubmit()" [formGroup]="signInForm" #myForm="ngForm">
+  <div formGroupName="etat">
+    <input name="Identifiant" formControlName="Identifiant">
+    <input name="Titre" formControlName="Titre">
+  </div>
+
+  <div *ngIf=" myForm.submitted && signInForm.controls['etat'].errors?.isRequired">
+    <span>{{signInForm.controls['etat'].errors.isRequired.expected}}</span>
+  </div>
+
+  <br>
+
+  <label for="Type">Choose a type:</label>
+
+  <select formControlName="Type">
+
+    <option *ngFor="let item of List" [ngValue]="item">{{item}}</option>
+  </select>
+
+  <br>
+  <br>
+
+  <label for="FicheList">Choose description type:</label>
+
+  <select formControlName="Fiche">
+
+    <option *ngFor="let item of FicheList" [ngValue]="item">{{item}}</option>
+  </select>
+
+  <br> <br>
+  <label for="date">Date de sortie</label>
+  <input type="date" formControlName="AnneeSortie">
+  <div *ngIf="myForm.submitted && signInForm.controls.AnneeSortie.errors?.min">
+    <span>{{signInForm.controls.AnneeSortie.errors.min.expected}}</span>
+  </div>
+<br> <br>
+  <button type="submit">Submit</button>
+
+</form>
